@@ -1,5 +1,9 @@
 {
     "data": {
+        "meta": {
+            "limit": 20,
+            "offset": 0
+        },
         "dealers" : [
             {
                 "dealer": {

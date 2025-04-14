@@ -47,6 +47,22 @@ paths:
             type: integer
           required: true
           description: car state id
+
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          required: false
+          description: results count on page
+
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          required: false
+          description: results offset (in results items)
+
+        
       
       responses:
         '200':
@@ -78,12 +94,24 @@ components:
         data:
           type: object
           properties:
+            meta:
+              type: object
+              properties:
+                limit:
+                  type: integer
+                  description: Количество результатов в запросе
+                  example: 20
+                offset:
+                  type: integer
+                  description: Сколько результатов пропущено до первого в выдаче
+                  example: 0
             dealers:
               type: array
               items:
                 $ref: '#/components/schemas/DealerAndCarPrice'
           required:
             - dealers
+            - meta
       required:
         - data
         
@@ -148,6 +176,7 @@ components:
                 $ref: '#/components/schemas/InvalidParamsError'
           required:
             - messageForUser
+            - errors
       required:
         - data
 
@@ -162,9 +191,11 @@ components:
           type: string
           description: Идентификатор ошибки
           example: not_found
-        userErrorMessage:
+        errorMessage:
           type: string
-          description: Город не найден
+          description: Текст ошибки
+          example: Город не найден
       required:
         - param
         - errorId
+        - errorMessage
