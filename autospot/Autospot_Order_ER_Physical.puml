@@ -99,7 +99,7 @@ Application "1" -- "n" ApplicationPaymentType
 ApplicationPaymentType "n" -- "1" PaymentType
 Application "n" --right-- "1" Customer
 Customer "1" -- "n" CustomerPhones
-Customer "1" -- "1" City
+Customer "n" -- "1" City
 Customer "1" -right- "n" Order
 Order "n" -- "1" CarState
 Order "n" -- "1" CarModel
@@ -107,7 +107,7 @@ CarBrand "1" -up- "n" CarModel
 Order "1" -right- "n" OrderDealers
 OrderDealers "n" -- "1" DealerBranch
 DealerBranch "n" -- "1" DealerCompany
-DealerBranch "1" -- "1" City
+DealerBranch "n" -- "1" City
 Order "n" -- "1" PaymentType
 Order "n" -- "1" OrderState
 
