@@ -81,6 +81,8 @@ paths:
           description: User is not authorized
         '403':
           description: User has no access to action
+        '419':
+          description: Auth token expired
         '500':
           description: Internal server error
 
