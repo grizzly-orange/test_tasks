@@ -79,6 +79,7 @@ class DealerCompany {
 class DealerBranch {
     PK dealerBranchId: Int
     FK dealerCompanyId: Int
+    dealerBranchName: String
     FK cityId: Int
     street: String
     houseNumber: String
