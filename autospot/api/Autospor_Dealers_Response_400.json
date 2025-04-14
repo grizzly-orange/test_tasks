@@ -1,0 +1,13 @@
+{
+  "data": 
+  {
+    "messageForUser": "Неверно указаны параметры. Измените значения и попробуйте снова.",
+    "errors": [
+      {
+        "param": "cityId",
+        "errorId": "not_found",
+        "errorMessage": "Город не найден"
+      }
+    ]
+  }
+}
