@@ -20,6 +20,34 @@ paths:
       description: Get dealers list by params
       operationId: getDealersByParams
       
+      parameters:
+        - in: query
+          name: brandId
+          schema:
+            type: integer
+          required: true
+          description: car brand id
+        - in: query
+          name: modelId
+          schema:
+            type: integer
+          required: true
+          description: car model id
+
+        - in: query
+          name: cityId
+          schema:
+            type: integer
+          required: true
+          description: search city id
+        
+        - in: query
+          name: carStateId
+          schema:
+            type: integer
+          required: true
+          description: car state id
+      
       responses:
         '200':
           description: Successful operation

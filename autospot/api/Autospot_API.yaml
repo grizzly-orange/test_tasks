@@ -20,19 +20,59 @@ paths:
       description: Get dealers list by params
       operationId: getDealersByParams
       
+      parameters:
+        - in: query
+          name: brandId
+          schema:
+            type: integer
+          required: true
+          description: car brand id
+        - in: query
+          name: modelId
+          schema:
+            type: integer
+          required: true
+          description: car model id
+
+        - in: query
+          name: cityId
+          schema:
+            type: integer
+          required: true
+          description: search city id
+        
+        - in: query
+          name: carStateId
+          schema:
+            type: integer
+          required: true
+          description: car state id
+      
       responses:
         '200':
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Dealers'
+                $ref: '#/components/schemas/DealersResponse'
+        '400':
+          description: Invalid params
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParamsResponse'
+        '401':
+          description: User is not authorized
+        '403':
+          description: User has no access to action
+        '500':
+          description: Internal server error
 
   
 components:
   schemas:
 
-    Dealers:
+    DealersResponse:
       type: object
       properties:
         data:
@@ -91,3 +131,40 @@ components:
       required:
         - dealer
         - carPrice
+
+    InvalidParamsResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            messageForUser:
+              type: string
+              description: Сообщение для пользователя
+              example: Неверно указаны параметры. Измените значения и попробуйте снова.
+            errors:
+              type: array
+              items:
+                $ref: '#/components/schemas/InvalidParamsError'
+          required:
+            - messageForUser
+      required:
+        - data
+
+    InvalidParamsError:
+      type: object
+      properties: 
+        param:
+          type: string
+          description: Параметр
+          example: cityId
+        errorId:
+          type: string
+          description: Идентификатор ошибки
+          example: not_found
+        userErrorMessage:
+          type: string
+          description: Город не найден
+      required:
+        - param
+        - errorId
