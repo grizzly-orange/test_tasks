@@ -28,18 +28,13 @@ class Customer {
     name: String
     middleName: String
     lastName: String
+    FK cityId: String
 }
 
 class CustomerPhones {
     FK customerId: Int
     phone: String
     isActive: Boolean
-    isDefault: Boolean
-}
-
-class CustomerCities {
-    FK customerId: Int
-    FK cityId: Int
     isDefault: Boolean
 }
 
@@ -53,7 +48,15 @@ class Order {
     FK carStateId: Int
     FK modelId: Int
     FK customerId: Int
-    FK paymentType: Int 
+    FK paymentType: Int
+    FK orderStateId: Int
+    createdAt: DateTime
+    updatedAt: DateTime
+}
+
+enum OrderState {
+    PK orderStateId: Int
+    orderStateName: String
 }
 
 enum CarState {
@@ -93,11 +96,10 @@ class DealerBranch {
 
 Application "n" -- "1" ApplicationType
 Application "1" -- "n" ApplicationPaymentType
-ApplicationPaymentType "n" -- "1  " PaymentType
+ApplicationPaymentType "n" -- "1" PaymentType
 Application "n" --right-- "1" Customer
 Customer "1" -- "n" CustomerPhones
-Customer "1" -- "n" CustomerCities
-CustomerCities "n" -- "1" City
+Customer "1" -- "1" City
 Customer "1" -right- "n" Order
 Order "n" -- "1" CarState
 Order "n" -- "1" CarModel
@@ -106,6 +108,7 @@ Order "1" -right- "n" OrderDealers
 OrderDealers "n" -- "1" DealerBranch
 DealerBranch "n" -- "1" DealerCompany
 DealerBranch "1" -- "1" City
-Order "n" -- "1  " PaymentType
+Order "n" -- "1" PaymentType
+Order "n" -- "1" OrderState
 
 @enduml
