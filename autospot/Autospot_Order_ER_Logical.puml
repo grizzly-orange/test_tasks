@@ -20,18 +20,17 @@ class "Клиент" as Customer {
     Фамилия
     Отчество
     Город
-    Номер телефона []
+    Номер телефона
 }
 
 class "Заказ" as Order {
     Идентификатор заказа
-    Идентификатор заявки
     Марка авто
     Модель авто
     Состояние авто
     Клиент
     Дилер []
-    Способ оплаты  
+    Способ покупки 
 }
 
 class "Дилер" as Dealer {
@@ -44,7 +43,7 @@ Application "n" -- "1  " Customer
 Application "n" -- "m" PaymentType
 PaymentType  "1" -- "1" Order
 Customer "n" -- "1" Order 
-Order "1" -- "n" Dealer
+Order "n   " -right- "m" Dealer
 
 
 @enduml
