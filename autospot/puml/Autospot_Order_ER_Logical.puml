@@ -41,7 +41,7 @@ class "Дилер" as Dealer {
     Адрес
 }
 
-Application "n" -- "1  " Customer
+Application .. Customer
 Application "n" -- "m" PaymentType
 PaymentType  "1" -- "1" Order
 Customer "n" -- "1" Order 
