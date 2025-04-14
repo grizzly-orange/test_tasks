@@ -50,9 +50,15 @@ enum City {
 
 class Order {
     PK orderId: Int
+    FK carStateId: Int
     FK modelId: Int
     FK customerId: Int
     FK paymentType: Int 
+}
+
+enum CarState {
+    PK carStateId: Int
+    carStateName: String
 }
 
 class CarBrand {
@@ -93,6 +99,7 @@ Customer "1" -- "n" CustomerPhones
 Customer "1" -- "n" CustomerCities
 CustomerCities "n" -- "1" City
 Customer "1" -right- "n" Order
+Order "n" -- "1" CarState
 Order "n" -- "1" CarModel
 CarBrand "1" -up- "n" CarModel
 Order "1" -right- "n" OrderDealers
