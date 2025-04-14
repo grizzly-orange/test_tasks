@@ -1,0 +1,18 @@
+{
+    "data": {
+        "dealers" : [
+            {
+                "dealer": {
+                    "dealerBranchId": 1520,
+                    "dealerName": "Рольф Краснодар Audi",
+                    "dealerAddress": "Краснодар, ул. Уральская, д. 98/11"
+                },
+                "carPrice": {
+                    "sum": 8796000,
+                    "currencyId": "rub",
+                    "priceDisplay": "8.796.000 рублей"
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,93 @@
+openapi: 3.0.3
+info:
+  title: Swagger Autospot - OpenAPI 3.0
+  description: Endpoint for Autospot test task
+
+  version: 0.1.0
+
+servers:
+  - url: https://grizzlyorange.ucoz.net
+tags:
+  - name: OrdersAtAdminPanel
+    description: Manage orders at admin panel 
+
+paths:
+  /v1/admin/orders/dealers.json:
+    get:
+      tags:
+        - OrdersAtAdminPanel
+      summary: Get dealers list by params
+      description: Get dealers list by params
+      operationId: getDealersByParams
+      
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dealers'
+
+  
+components:
+  schemas:
+
+    Dealers:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            dealers:
+              type: array
+              items:
+                $ref: '#/components/schemas/DealerAndCarPrice'
+          required:
+            - dealers
+      required:
+        - data
+        
+    DealerAndCarPrice:
+      type: object
+      properties: 
+        dealer: 
+          type: object
+          properties:
+            dealerBranchId:
+              type: integer
+              description: Идентификатор отделения дилера
+              example: 1520
+            dealerBranchName:
+              type: string
+              description: Название отделения дилера
+              example: "Рольф Краснодар Audi"
+            dealerBranchAddress:
+              type: string
+              description: Адрес отделения дилера
+              example: "Краснодар, ул. Уральская, д. 98/11"
+          required:
+            - dealerBranchId
+            - dealerBranchName
+            - dealerBranchAddress
+        carPrice: 
+          type: object
+          properties:
+            sum:
+              type: integer
+              description: Стоимость
+              example: 8796000
+            currencyId:
+              type: string
+              description: Идентификатор валюты
+              example: rub
+            priceDisplay:
+              type: string
+              description: Стоимость с валютой, согласно настройкам админки
+              example: 8.796.000 рублей
+          required:
+            - priceDisplay
+            - sum
+            - currencyId
+      required:
+        - dealer
+        - carPrice
