@@ -1,0 +1,103 @@
+@startuml Автоспот: физическая модель данных заказа
+
+left to right direction
+
+class Application {
+    PK applicationId: Int
+    FK applicationTypeId: Int
+    FK customerId: Int
+}
+
+enum ApplicationType {
+    PK applicationTypeId: Int
+    applicationTypeName: String
+}
+
+enum PaymentType {
+    PK paymentTypeId: Int
+    paymentTypeName: String
+}
+
+class ApplicationPaymentType {
+    FK applicationId: Int
+    FK paymentTypeId: Int
+}
+
+class Customer {
+    PK customerId: Int
+    name: String
+    middleName: String
+    lastName: String
+}
+
+class CustomerPhones {
+    FK customerId: Int
+    phone: String
+    isActive: Boolean
+    isDefault: Boolean
+}
+
+class CustomerCities {
+    FK customerId: Int
+    FK cityId: Int
+    isDefault: Boolean
+}
+
+enum City {
+    PK cityId: Int
+    cityName: String
+}
+
+class Order {
+    PK orderId: Int
+    FK modelId: Int
+    FK customerId: Int
+    FK paymentType: Int 
+}
+
+class CarBrand {
+    PK carBrandId: Int
+    carBrandName: String
+}
+
+class CarModel {
+    PK carModelId: Int
+    FK brandId: Int
+    carModelName: String
+}
+
+class OrderDealers {
+    FK orderId: Int
+    FK dealerBranchId: Int
+}
+
+class DealerCompany {
+    PK dealerCompanyId: Int
+    companyName: String
+}
+
+class DealerBranch {
+    PK dealerBranchId: Int
+    FK dealerCompanyId: Int
+    FK cityId: Int
+    street: String
+    houseNumber: String
+}
+
+Application "n" -- "1" ApplicationType
+Application "1" -- "n" ApplicationPaymentType
+ApplicationPaymentType "n" -- "1" PaymentType
+Application "n" --right-- "1" Customer
+Customer "1" -- "n" CustomerPhones
+Customer "1" -- "n" CustomerCities
+CustomerCities "n" -- "1" City
+Customer "1" -right- "n" Order
+Order "n" -- "1" CarModel
+CarBrand "1" -up- "n" CarModel
+Order "1" -right- "n" OrderDealers
+OrderDealers "n" -- "1" DealerBranch
+DealerBranch "n" -- "1" DealerCompany
+DealerBranch "1" -- "1" City
+Order -- PaymentType
+
+@enduml
