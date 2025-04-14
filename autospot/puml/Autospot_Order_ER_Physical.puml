@@ -5,7 +5,8 @@ left to right direction
 class Application {
     PK applicationId: Int
     FK applicationTypeId: Int
-    FK customerId: Int
+    customerPhone: String
+    customerName: String
 }
 
 enum ApplicationType {
@@ -95,20 +96,25 @@ class DealerBranch {
 }
 
 Application "n" -- "1" ApplicationType
-Application "1" -- "n" ApplicationPaymentType
-ApplicationPaymentType "n" -- "1" PaymentType
-Application "n" --right-- "1" Customer
-Customer "1" -- "n" CustomerPhones
-Customer "n" -- "1" City
-Customer "1" -right- "n" Order
+Application "1" -- "n  " ApplicationPaymentType
+ApplicationPaymentType "n" -up- "1    " PaymentType
+Order "n" -- "1" PaymentType
 Order "n" -- "1" CarState
-Order "n" -- "1" CarModel
-CarBrand "1" -up- "n" CarModel
+Order "n" -- "1  " CarModel
+CarModel "n" -left- "1  " CarBrand  
+Customer "1" -- "n" CustomerPhones
+Customer "n" -- "1  " City
+Customer "1" -right- "n" Order
 Order "1" -right- "n" OrderDealers
 OrderDealers "n" -- "1" DealerBranch
 DealerBranch "n" -- "1" DealerCompany
-DealerBranch "n" -- "1" City
-Order "n" -- "1" PaymentType
+DealerBranch "n" -- "1  " City
+
 Order "n" -- "1" OrderState
+
+'Application "n" -- "1" ApplicationType
+'Application "1" -- "n" ApplicationPaymentType
+'ApplicationPaymentType "n" -- "1" PaymentType
+
 
 @enduml
