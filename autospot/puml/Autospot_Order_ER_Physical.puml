@@ -65,7 +65,7 @@ enum CarState {
     carStateName: String
 }
 
-class CarBrand {
+enum CarBrand {
     PK carBrandId: Int
     carBrandName: String
 }
