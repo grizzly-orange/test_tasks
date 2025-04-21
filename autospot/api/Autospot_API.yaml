@@ -11,6 +11,9 @@ tags:
   - name: OrdersAtAdminPanel
     description: Manage orders at admin panel 
 
+security:
+  - bearerAuth: []
+
 paths:
   /v1/admin/orders/dealers.json:
     get:
@@ -19,7 +22,7 @@ paths:
       summary: Get dealers list by params
       description: Get dealers list by params
       operationId: getDealersByParams
-      
+
       parameters:
         - in: query
           name: brandId
@@ -201,3 +204,10 @@ components:
         - param
         - errorId
         - errorMessage
+      
+  securitySchemes:
+
+    bearerAuth: 
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
